@@ -67,6 +67,7 @@ clean:
 	@make clean -C $(PATH_NIBBLER)
 	@make clean -C $(PATH_ASDL)
 	rm -f $(OBJ)
+	rm -f $(OBJ_TESTS)
 
 fclean:	clean
 	@make fclean -C $(PATH_ACURSES)
