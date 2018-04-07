@@ -30,6 +30,7 @@ private:
 	std::vector<std::string>	*_map;
 	Player				*_player;
 	char				_lastCase;
+	bool				_dead;
 };
 
 #endif /* !GHOST_HPP */

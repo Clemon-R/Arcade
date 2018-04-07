@@ -57,11 +57,11 @@ void	Pacman::move(Timer &playerTimer, Timer &ghostTimer)
 
 void	Pacman::displayInfo(Timer const &gameTimer)
 {
-		(*_graphic)->print(std::make_pair(0, 0)
-                    , "Score : " + std::to_string(_player->getScore()));
-		(*_graphic)->print(std::make_pair(0, 15),
-		"Time : " + std::to_string(
-		(gameTimer.getTimeMS() + 500.0) / 1000.0));
+	(*_graphic)->print(std::make_pair(0, 0)
+	    , "Score : " + std::to_string(_player->getScore()));
+	(*_graphic)->print(std::make_pair(0, 15),
+	"Time : " + std::to_string(
+	(gameTimer.getTimeMS() + 500.0) / 1000.0));
 }
 
 int	Pacman::verifyWindowSize()

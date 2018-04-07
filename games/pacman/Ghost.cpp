@@ -14,7 +14,8 @@ Player *player) :
 	_y(y),
 	_map(map),
 	_player(player),
-	_lastCase(' ')
+	_lastCase(' '),
+	_dead(false)
 {
 }
 
@@ -26,12 +27,16 @@ int	Ghost::checkValidMove(int const x, int const y)
 	return (1);
 }
 
+#include <iostream>
+
 void	Ghost::move(int const x, int const y)
 {
 	char	tmp;
 
-	if (_map[0][y][x] == 'p')
+	if (_map[0][y][x] == 'p' && !_player->getKiller())
 		_player->setDead(true);
+	else if (_map[0][y][x] == 'p')
+		_player->setScore(_player->getScore() + 200);
 	_map[0][_y][_x] = _lastCase;
 	_lastCase = _map[0][y][x];
 	_map[0][y][x] = 'g';
@@ -60,6 +65,10 @@ void	Ghost::moveOnTarget(int const diff_x, int const diff_y)
 
 void	Ghost::move()
 {
+	if (_map[0][_y][_x] != 'g')
+		_dead = true;
+	if (_dead)
+		return;
 	for (size_t i = 0; i < _map[0].size(); i++) {
 		for (size_t j = 0; j < _map[0][0].size(); ++j) {
 			if (_map[0][i][j] == 'p') {

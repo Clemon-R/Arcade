@@ -13,7 +13,8 @@ Player::Player(std::size_t x, std::size_t y, std::vector<std::string> *map) :
 	_y(y),
 	_map(map),
 	_dead(false),
-	_score(0)
+	_score(0),
+	_killer(false)
 {
 }
 
@@ -26,10 +27,18 @@ int	Player::checkValidMove(int const x, int const y)
 
 void	Player::move(int const x, int const y)
 {
-	if (_map[0][y][x] == 'g')
+	if (_killer && _pacgumTimer.getTimeS() >= 5)
+		_killer = false;
+	if (!_killer && _map[0][y][x] == 'g')
 		_dead = true;
+	else if (_map[0][y][x] == 'g')
+		_score += 200;
 	if (_map[0][y][x] == '.')
 		_score += 20;
+	if (_map[0][y][x] == 'O') {
+		_pacgumTimer.restart();
+		_killer = true;
+	}
 	_map[0][_y][_x] = ' ';
 	_map[0][y][x] = 'p';
 	_y = y;
@@ -83,7 +92,22 @@ void	Player::setDead(bool dead)
 	_dead = dead;
 }
 
+bool const	Player::getKiller() const
+{
+	return (_killer);
+}
+
+void	Player::setKiller(bool killer)
+{
+	_killer = killer;
+}
+
 std::size_t const	Player::getScore() const
 {
 	return (_score);
+}
+
+void	Player::setScore(std::size_t score)
+{
+	_score = score;
 }

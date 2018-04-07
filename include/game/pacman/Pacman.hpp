@@ -33,7 +33,7 @@ private:
 	Map			*_map;
 	Player			*_player;
 	std::vector<Ghost *>	_ghost;
-	int						_dir;
+	int			_dir;
 };
 
 #endif /* !PACMAN_HPP_ */
