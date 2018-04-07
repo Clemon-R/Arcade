@@ -33,6 +33,7 @@ public:
 	std::map<char, std::size_t>	getPlayerPos(void) const;
 	std::vector<std::string>	*getMap(void);
 	std::vector<std::map<char, std::size_t>>	getGhostPos(void) const;
+	std::size_t const	countPacgums() const;
 private:
 	std::vector<std::string>	_map;
 	Graphic				&_graphic;

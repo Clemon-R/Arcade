@@ -87,7 +87,7 @@ std::size_t	Pacman::start()
 
 	(*_graphic)->setEventHandler(handler);
 	while (*_graphic && (*_graphic)->isOpen() && _run &&
-	!_player->getDead()) {
+	!_player->getDead() && _map->countPacgums() > 0) {
 		if (this->verifyWindowSize())
 			continue;
 		(*_graphic)->clear();

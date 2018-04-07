@@ -83,6 +83,20 @@ std::size_t const	Map::getScale() const noexcept
 	return (_scale);
 }
 
+std::size_t const	Map::countPacgums() const
+{
+	std::size_t	ct;
+
+	for (size_t i = 0; i < _map.size(); ++i) {
+		for (size_t j = 0; j < _map[i].size(); ++j) {
+			if (_map[i][j] == '.') {
+				ct++;
+			}
+		}
+	}
+	return (ct);
+}
+
 void	Map::display(void)
 {
 	std::size_t	mid = (_graphic.getWidth() - GETY(_map[0].size()) * _scale) / 2;
