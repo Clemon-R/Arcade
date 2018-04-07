@@ -3,3 +3,4 @@
 *.so
 arcade
 scores
+tests_unit

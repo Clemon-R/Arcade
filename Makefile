@@ -30,6 +30,8 @@ OBJ	=	$(SRC:.cpp=.o)
 
 NAME	=	arcade
 
+NAME_TESTS	=	tests_unit
+
 CXX	=	g++
 
 CXXFLAGS	=	-Iinclude -ldl -std=c++14
@@ -76,12 +78,13 @@ fclean:	clean
 	@make fclean -C $(PATH_NIBBLER)
 	@make fclean -C $(PATH_ASDL)
 	rm -f $(NAME)
+	rm -f $(NAME_TESTS)
 
 re:		fclean
 	make all
 
 tests_run:	$(OBJ_NO_MAIN) $(OBJ_TESTS)
-	$(CXX) $(OBJ_NO_MAIN) $(OBJ_TESTS) -o tests_unit $(CXXFLAGS) --coverage -lcriterion
+	$(CXX) $(OBJ_NO_MAIN) $(OBJ_TESTS) -o $(NAME_TESTS) $(CXXFLAGS) --coverage -lcriterion
 	./tests_unit
 
 
