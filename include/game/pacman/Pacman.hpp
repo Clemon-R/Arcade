@@ -14,6 +14,7 @@
 #include "game/pacman/Map.hpp"
 #include "game/pacman/Player.hpp"
 #include "game/pacman/Ghost.hpp"
+#include "game/pacman/Timer.hpp"
 
 class Pacman {
 public:
@@ -21,6 +22,9 @@ public:
 	~Pacman();
 	void			moveGhost();
 	std::size_t		start();
+	void			move(Timer &playerTimer, Timer &ghostTimer);
+	void			displayInfo(Timer const &gameTimer);
+	int			verifyWindowSize();
 private:
 	void			handlerEvent(int key);
 	Graphic			**_graphic;

@@ -5,17 +5,20 @@
 ## Makefile
 ##
 
-SRC	=	Pacman.cpp \
-		Map.cpp \
-		Player.cpp \
-		Ghost.cpp
+SRC	=	Pacman.cpp	\
+		Map.cpp		\
+		Player.cpp	\
+		Ghost.cpp	\
+		Timer.cpp
 
 OBJ	=	$(SRC:.cpp=.o)
 DEPS	=	$(SRC:.cpp=.d)
 
 HEADER	=	$(addprefix ../../include/game/pacman/,	\
 		Pacman.hpp				\
-		Player.hpp)
+		Player.hpp				\
+		Ghost.hpp				\
+		Timer.hpp)
 
 NAME	=	../lib_arcade_pacman.so
 

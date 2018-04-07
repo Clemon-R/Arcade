@@ -5,20 +5,10 @@
  ** Pacman
  */
 
-#include "game/pacman/Pacman.hpp"
-#include "Control.hpp"
 #include <memory>
 #include <unistd.h>
-#include <ctime>
-#include <sys/timeb.h>
-
-static int  getMilliseconds()
-{
-    timeb   tb;
-
-    ftime(&tb);
-    return (tb.millitm + (tb.time & 0xfffff) * 1000);
-}
+#include "game/pacman/Pacman.hpp"
+#include "Control.hpp"
 
 Pacman::Pacman(Graphic **graphic, const std::string &name) :
 	_graphic(graphic),	
@@ -53,34 +43,58 @@ void	Pacman::moveGhost()
 		it->move();
 }
 
+void	Pacman::move(Timer &playerTimer, Timer &ghostTimer)
+{
+	if (playerTimer.getTimeMS() >= 300) {
+		_player->move(_dir);
+		playerTimer.restart();
+	}
+	if (ghostTimer.getTimeMS() >= 500) {
+		this->moveGhost();
+		ghostTimer.restart();
+	}
+}
+
+void	Pacman::displayInfo(Timer const &gameTimer)
+{
+		(*_graphic)->print(std::make_pair(0, 0)
+                    , "Score : " + std::to_string(_player->getScore()));
+		(*_graphic)->print(std::make_pair(0, 15),
+		"Time : " + std::to_string(
+		(gameTimer.getTimeMS() + 500.0) / 1000.0));
+}
+
+int	Pacman::verifyWindowSize()
+{
+	if (_map->getScale() <= 0){
+		(*_graphic)->clear();
+		(*_graphic)->print(std::make_pair(0, 0),
+		"Fenetre trop petite pour afficher le jeu");
+		(*_graphic)->refresh();
+		return (1);
+	}
+	return (0);
+}
+
 std::size_t	Pacman::start()
 {
 	std::function<void (int)>   handler =
 	std::bind(&Pacman::handlerEvent, this, std::placeholders::_1);
-	std::size_t	next = getMilliseconds() + 500;
-	bool	move = true;
+	Timer	playerTimer;
+	Timer	ghostTimer;
+	Timer	gameTimer;
 
 	(*_graphic)->setEventHandler(handler);
 	while (*_graphic && (*_graphic)->isOpen() && _run &&
 	!_player->getDead()) {
-		if (next > getMilliseconds())
+		if (this->verifyWindowSize())
 			continue;
-		else if (_map->getScale() <= 0){
-			(*_graphic)->clear();
-			(*_graphic)->print(std::make_pair(0, 0), "Fenetre trop petite pour afficher le jeu");
-			(*_graphic)->refresh();
-			continue;
-		}
-		if (move)
-			this->moveGhost();
-		move = !move;
-		_player->move(_dir);
 		(*_graphic)->clear();
 		_map->display();
-		(*_graphic)->print(std::make_pair(0, 0)
-                    , "Score : " + std::to_string(_player->getScore()));
+		this->move(playerTimer, ghostTimer);
+		this->displayInfo(gameTimer);
 		(*_graphic)->refresh();
-		next = getMilliseconds() + 100;
+		usleep(100);
 	}
 	(*_graphic)->setEventHandler(nullptr);
 	return (_player->getScore());
