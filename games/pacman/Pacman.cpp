@@ -103,15 +103,16 @@ std::size_t	Pacman::start()
 void    Pacman::handlerEvent(int key)
 {
 	switch (key) {
-		case Control::BACKSPACE:
-			_run = false;
-			break;
-		case Control::UP:
-		case Control::DOWN:
-		case Control::LEFT:
-		case Control::RIGHT:
+	case Control::BACKSPACE:
+		_run = false;
+		break;
+	case Control::UP:
+	case Control::DOWN:
+	case Control::LEFT:
+	case Control::RIGHT:
+		if (!_player->tryMove(key))
 			_dir = key;
-			break;
+		break;
 	}
 }
 

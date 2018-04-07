@@ -58,6 +58,21 @@ void	Player::move(int key)
 	}
 }
 
+int	Player::tryMove(int key)
+{
+	switch (key) {
+	case Control::UP:
+		return (checkValidMove(_x, _y - 1));
+	case Control::DOWN:
+		return (checkValidMove(_x, _y + 1));
+	case Control::LEFT:
+		return (checkValidMove(_x - 1, _y));
+	case Control::RIGHT:
+		return (checkValidMove(_x + 1, _y));
+	}
+	return (1);
+}
+
 bool const	Player::getDead() const
 {
 	return (_dead);

@@ -17,6 +17,7 @@ class Player
 public:
 	Player(std::size_t x, std::size_t y, std::vector<std::string> *map);
 	void			move(int key);
+	int			tryMove(int key);
 	void			move(int const x, int const y);
 	int			checkValidMove(int const x, int const y);
 	bool const		getDead() const;
