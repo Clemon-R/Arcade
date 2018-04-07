@@ -49,7 +49,8 @@ void	Pacman::move(Timer &playerTimer, Timer &ghostTimer)
 		_player->move(_dir);
 		playerTimer.restart();
 	}
-	if (ghostTimer.getTimeMS() >= 500) {
+	if ((_player->getKiller() && ghostTimer.getTimeMS() >= 700) ||
+	ghostTimer.getTimeMS() >= 500) {
 		this->moveGhost();
 		ghostTimer.restart();
 	}

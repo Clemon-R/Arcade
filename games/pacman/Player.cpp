@@ -27,7 +27,7 @@ int	Player::checkValidMove(int const x, int const y)
 
 void	Player::move(int const x, int const y)
 {
-	if (_killer && _pacgumTimer.getTimeS() >= 5)
+	if (_killer && _pacgumTimer.getTimeS() >= 10)
 		_killer = false;
 	if (!_killer && _map[0][y][x] == 'g')
 		_dead = true;

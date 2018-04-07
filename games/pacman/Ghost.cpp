@@ -27,8 +27,6 @@ int	Ghost::checkValidMove(int const x, int const y)
 	return (1);
 }
 
-#include <iostream>
-
 void	Ghost::move(int const x, int const y)
 {
 	char	tmp;
@@ -71,8 +69,11 @@ void	Ghost::move()
 		return;
 	for (size_t i = 0; i < _map[0].size(); i++) {
 		for (size_t j = 0; j < _map[0][0].size(); ++j) {
-			if (_map[0][i][j] == 'p') {
+			if (_map[0][i][j] == 'p' && !_player->getKiller()) {
 				moveOnTarget(j - _x, i - _y);
+				break;
+			} else if (_map[0][i][j] == 'p') {
+				moveOnTarget(-(j - _x), -(i - _y));
 				break;
 			}
 		}
