@@ -24,13 +24,17 @@ public:
 	void	move(int const x, int const y);
 	void	moveOnTarget(int const diff_x, int const diff_y);
 	int	checkValidMove(int const x, int const y);
+	void	handleDeath();
 private:
 	std::size_t			_x;
 	std::size_t			_y;
+	std::size_t const		_xSpawn;
+	std::size_t const		_ySpawn;
 	std::vector<std::string>	*_map;
 	Player				*_player;
 	char				_lastCase;
 	bool				_dead;
+	Timer				_spawnTimer;
 };
 
 #endif /* !GHOST_HPP */

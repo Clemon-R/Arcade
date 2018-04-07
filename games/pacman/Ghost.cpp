@@ -12,10 +12,12 @@ Ghost::Ghost(std::size_t x, std::size_t y, std::vector<std::string> *map,
 Player *player) :
 	_x(x),
 	_y(y),
+	_xSpawn(x),
+	_ySpawn(y),
 	_map(map),
 	_player(player),
 	_lastCase(' '),
-	_dead(false)
+	_dead(true)
 {
 }
 
@@ -61,11 +63,21 @@ void	Ghost::moveOnTarget(int const diff_x, int const diff_y)
 	}
 }
 
+void	Ghost::handleDeath()
+{
+	if (_map[0][_y][_x] != 'g') {
+		_spawnTimer.restart();
+		_dead = true;
+		_x = _xSpawn;
+		_y = _ySpawn;
+		_map[0][_y][_x] = 'g';
+	}
+}
+
 void	Ghost::move()
 {
-	if (_map[0][_y][_x] != 'g')
-		_dead = true;
-	if (_dead)
+	this->handleDeath();
+	if (_dead && _spawnTimer.getTimeS() < 10)
 		return;
 	for (size_t i = 0; i < _map[0].size(); i++) {
 		for (size_t j = 0; j < _map[0][0].size(); ++j) {
