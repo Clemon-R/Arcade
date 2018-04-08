@@ -31,8 +31,8 @@ int	Map::loadMap(std::string const &fileName) noexcept
 		if (tmp.size() > 0)
 			_map.push_back(tmp);
 	}
-	_width = _map[0].size();
 	_height = _map.size();
+	_width = _height > 0 ? _map[0].size() : 0;
 	_scale = _graphic.getWidth() / GETY(_width);
 	if (_graphic.getHeight() / GETY(_height) < _scale)
 		_scale = _graphic.getHeight() / GETY(_height);
@@ -99,11 +99,11 @@ std::size_t const	Map::countPacgums() const
 
 void	Map::display(void)
 {
-	std::size_t	mid = (_graphic.getWidth() - GETY(_map[0].size()) * _scale) / 2;
+	std::size_t	mid = (_graphic.getWidth() - GETY(_width) * _scale) / 2;
 	std::size_t	offset = (GETY(1) - GETX(1)) / 2;
 
-	for (size_t i = 0; i < _map.size(); i++) {
-		for (size_t j = 0; j < _map[i].size(); ++j) {
+	for (size_t i = 0; i < _height; i++) {
+		for (size_t j = 0; j < _map[i].size() && j < _width; ++j) {
 			switch (_map[i][j]) {
 			case '#':
 				_graphic.drawSquare(std::make_pair(mid + GETY(j) * _scale, GETY(i) * _scale), std::make_pair(GETY(_scale), GETY(_scale)), Graphic::Color::BLUE);
