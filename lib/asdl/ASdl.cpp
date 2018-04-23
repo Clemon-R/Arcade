@@ -7,7 +7,7 @@
 
 #include "lib/ASdl.hpp"
 #include <iostream>
-#include <SDL/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 ASdl::ASdl() : _window(nullptr)
 {
