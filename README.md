@@ -1,32 +1,29 @@
 # Arcade
+Arcade is a project in **C**, for Epitech Lyon School.
 
-Virtual Arcade born
-## Getting Started
+The objective of this project was to make few games, in the shape of shared librairie and also few graphic lib also in shape of shared librairie, to finaly load dynamicly these lib when running the launcher.
 
-You just need to clone and compile this project.
+## Which graphics libs ?
+First with the most familiar lib **SFML**
 
-### Prerequisites
+## How to run it ?
+You just need to do this
 
-You need to install:
+> ./arcade (lib directory)
 
-```
-libsfml-dev
-libncurses-dev
-libsdl2-ttf-dev
-libsdl2-dev
-```
+or this
 
-## Running the tests
+> ./arcade -h
 
-You just need to run
-```
-./arcade lib/(choose one of the lib .so)
-```
+Output for **"./arcade -h"**
 
-## Environements
+    INPUT
+        lib_path        the path of the lib to use.
+  
+  
 
-Developed on Linux
+## Environnement
+Developed on Unix system
 
-## Authors
-
-* **Rahaël Goulmot** - *Initial work* - [Arcade](https://github.com/Clemon-R/Arcade)
+# Author
+[**Raphaël Goulmot**](https://www.linkedin.com/in/rapha%C3%ABl-goulmot-405762138/) | Epitech student second year
