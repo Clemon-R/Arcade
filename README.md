@@ -25,5 +25,8 @@ Output for **"./arcade -h"**
 ## Environnement
 Developed on Unix system
 
+## Images
+![enter image description here](https://image.noelshack.com/fichiers/2018/23/2/1528230121-arcade.png)
+
 # Author
 [**Raphaël Goulmot**](https://www.linkedin.com/in/rapha%C3%ABl-goulmot-405762138/) | Epitech student second year
